@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using VMS.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using VMS.Models;
 
 namespace VMS
 {
@@ -43,6 +44,9 @@ namespace VMS
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddDbContext<VMSContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("VMSContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
